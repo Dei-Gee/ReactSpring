@@ -14,3 +14,4 @@ A demo full stack app that uses Spring REST API connected to a React Web App.
 - Click File -> Import -> Existing Maven Project
 
 ## Backend Setup
+coming soon...
