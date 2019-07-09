@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addGroceryItem } from '../actions/groceryListActions';
+import classnames from 'classnames';
+import errorsReducer from '../reducers/errorsReducer';
 
 class Create extends Component {
     constructor(props) {
@@ -37,7 +42,9 @@ class Create extends Component {
             quantity: this.state.item_quantity 
         };
 
-        console.log(new_item);
+        // console.log(new_item);
+
+        this.props.addGroceryItem(new_item, this.props.history);
     }
 
     render() { 
@@ -81,5 +88,14 @@ class Create extends Component {
          );
     }
 }
- 
-export default Create;
+
+Create.propTypes = {
+    addGroceryItem: PropTypes.func.isRequired, 
+    errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    errors: state.errors
+});
+
+export default connect(null, {addGroceryItem} ) (Create);
