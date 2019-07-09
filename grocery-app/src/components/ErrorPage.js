@@ -13,13 +13,13 @@ class ErrorPage extends Component {
                     <div className="container justify-content-center">
                         <h2 className="bg-primary p-4 text-white text-center">Welcome to the Grocery List!</h2>
 
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-                            <span class="navbar-toggler-icon" />
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+                            <span className="navbar-toggler-icon" />
                         </button>
                     </div>
                 </nav>
 
-                <NavLink to="/" class="btn btn-light">
+                <NavLink to="/" className="btn btn-light">
                     Back to List
                 </NavLink>
 

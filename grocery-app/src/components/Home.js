@@ -1,16 +1,58 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            items: []
+         }
+    }
+
+    componentWillMount(){
+        axios.get('http://localhost:8181/api/grocerylist')
+            .then((function(res){
+                this.setState({
+                    items: res.data
+                });
+            }).bind(this))
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            })
+        ;
+    }
+
     render(){
+        // console.log(this.state.items);
+
+        const grocery_items  = this.state.items;
+
+        let items = grocery_items.map((item, index) => {
+            return(
+                <div className="card my-3 bg-light" key={index}>
+                    <h5>Item name: {item.name}</h5>
+                    <h5>Quantity: {item.quantity}</h5>
+
+                    <button className="btn btn-danger">
+                        Delete
+                    </button>
+                </div>
+            );
+        });
+
         return(
             <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
                     <div className="container justify-content-center">
                         <h2 className="bg-primary p-4 text-white text-center">Welcome to the Grocery List!</h2>
 
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-                            <span class="navbar-toggler-icon" />
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+                            <span className="navbar-toggler-icon" />
                         </button>
                     </div>
                 </nav>
@@ -34,22 +76,7 @@ class Home extends Component {
                                     </div>
                                 </div>
             
-                                <div className="card my-3 bg-light">
-                                    <h5>Item name: </h5>
-                                    <h5>Quantity: </h5>
-            
-                                    <button className="btn btn-danger">
-                                        Delete
-                                    </button>
-                                </div>
-                                <div className="card my-3 bg-light">
-                                        <h5>Item name: </h5>
-                                        <h5>Quantity: </h5>
-            
-                                    <button className="btn btn-danger">
-                                        Delete
-                                    </button>
-                                </div>
+                                {items}
                             </div>
                         </div>
                     </div>
