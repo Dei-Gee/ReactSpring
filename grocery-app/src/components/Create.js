@@ -75,8 +75,21 @@ class Create extends Component {
 
                                 <form className="col-md-8 mx-auto" onSubmit={this.handleSubmit}>
                                     <div className="form-group">
-                                        <p className="bg-danger text-white">{errors._name}</p>
-                                        <input type="text" className="form-control form-control-lg" value={this.state.item_name} name="item_name" id="item_name" placeholder="Item Name" onChange={this.handleChange} />
+                                        <input type="text" 
+                                            className={classnames("form-control form-control-lg", {
+                                                "is-invalid": errors._name
+                                            })} 
+                                            value={this.state.item_name} 
+                                            name="item_name" 
+                                            id="item_name" 
+                                            placeholder="Item Name" 
+                                            onChange={this.handleChange} 
+                                        />
+
+                                        {
+                                            errors._name && (<div className="invalid-feedback">{errors._name}</div>)
+                                        }
+
                                     </div>
 
                                     <div className="form-group">
