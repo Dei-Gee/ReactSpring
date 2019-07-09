@@ -35,8 +35,10 @@ class Home extends Component {
         let items = grocery_items.map((item, index) => {
             return(
                 <div className="card my-3 bg-light" key={index}>
-                    <h5>Item name: {item.name}</h5>
-                    <h5>Quantity: {item.quantity}</h5>
+                    <h5 className="text-muted mt-3">Item name:</h5> 
+                    <h5 className="text-primary">{item.name}</h5>
+                    <h5 className="text-muted mt-3">Quantity: </h5> 
+                    <h5 className="text-primary mb-3">{item.quantity}</h5>
 
                     <button className="btn btn-danger">
                         Delete
