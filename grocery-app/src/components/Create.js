@@ -16,17 +16,17 @@ class Create extends Component {
 
         this.state = { 
             item_name: "", 
-            item_quantity: 0
+            item_quantity: 0, 
+            errors: {}
          }
     }
 
-    componentWillUpdate(){
-        // axios.post("http://localhost:8181/api/grocerylist/add")
-        // .then({function(res){
-        //     console.log(res)
-        // }})
-        // .catch()
-        // .finally();
+    componentWillReceiveProps(nextProps){
+        if(nextProps.errors){
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
     }
 
     handleChange(e){
@@ -48,6 +48,9 @@ class Create extends Component {
     }
 
     render() { 
+
+        const { errors } = this.state;
+
         return ( 
             <div>
                 <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
@@ -72,10 +75,12 @@ class Create extends Component {
 
                                 <form className="col-md-8 mx-auto" onSubmit={this.handleSubmit}>
                                     <div className="form-group">
+                                        <p className="bg-danger text-white">{errors._name}</p>
                                         <input type="text" className="form-control form-control-lg" value={this.state.item_name} name="item_name" id="item_name" placeholder="Item Name" onChange={this.handleChange} />
                                     </div>
 
                                     <div className="form-group">
+                                    <p className="bg-danger text-white">{errors._quantity}</p>
                                         <input type="text" className="form-control form-control-lg" value={this.state.item_quantity} name="item_quantity" id="item_quantity" placeholder="Item Quantity" onChange={this.handleChange} />
                                     </div>
                                     <input type="submit" className="btn btn-primary btn-block mt-4" />
