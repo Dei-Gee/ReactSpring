@@ -5,7 +5,7 @@ import rootReducer from './reducers';
 const intialState = {};
 const middleWare = [thunk];
 
-const ReactReduxDevTools = window.__REDUX_DEVTOOLS_EXTEMSION__ && window.__REDUX_DEVTOOLS_EXTEMSION__();
+const ReactReduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
 let store;
 
