@@ -98,4 +98,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(null, {addGroceryItem} ) (Create);
+export default connect(mapStateToProps, {addGroceryItem} ) (Create);
