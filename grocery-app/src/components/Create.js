@@ -1,11 +1,45 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 class Create extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.state = { 
+            item_name: "", 
+            item_quantity: 0
+         }
     }
+
+    componentWillUpdate(){
+        // axios.post("http://localhost:8181/api/grocerylist/add")
+        // .then({function(res){
+        //     console.log(res)
+        // }})
+        // .catch()
+        // .finally();
+    }
+
+    handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+        const new_item = {
+            name: this.state.item_name, 
+            quantity: this.state.item_quantity 
+        };
+
+        console.log(new_item);
+    }
+
     render() { 
         return ( 
             <div>
@@ -27,15 +61,15 @@ class Create extends Component {
                                     Back to List
                                 </NavLink>
                                 
-                                <h4 class="text-center my-3">Add /Update Grocery Item</h4>
+                                <h4 className="text-center my-3">Add /Update Grocery Item</h4>
 
-                                <form className="col-md-8 mx-auto">
+                                <form className="col-md-8 mx-auto" onSubmit={this.handleSubmit}>
                                     <div className="form-group">
-                                        <input type="text" class="form-control form-control-lg" name="item_name" placeholder="Item Name" />
+                                        <input type="text" className="form-control form-control-lg" value={this.state.item_name} name="item_name" id="item_name" placeholder="Item Name" onChange={this.handleChange} />
                                     </div>
 
                                     <div className="form-group">
-                                        <input type="text" className="form-control form-control-lg" name="item_quantity" placeholder="Item Quantity" />
+                                        <input type="text" className="form-control form-control-lg" value={this.state.item_quantity} name="item_quantity" id="item_quantity" placeholder="Item Quantity" onChange={this.handleChange} />
                                     </div>
                                     <input type="submit" className="btn btn-primary btn-block mt-4" />
                                 </form>

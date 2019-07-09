@@ -10,21 +10,27 @@ class Home extends Component {
          }
     }
 
-    componentWillMount(){
-        axios.get('http://localhost:8181/api/grocerylist')
-            .then((function(res){
-                this.setState({
-                    items: res.data
+    async componentDidMount(){
+        try{
+            setInterval(async () => {
+                await axios.get('http://localhost:8181/api/grocerylist')
+                .then((function(res){
+                    this.setState({
+                        items: res.data
+                    });
+                }).bind(this))
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+                .finally(function () {
+                    // always executed
                 });
-            }).bind(this))
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
-            .finally(function () {
-                // always executed
-            })
-        ;
+            }, 300);
+        }
+        catch(e){
+
+        }
     }
 
     render(){
