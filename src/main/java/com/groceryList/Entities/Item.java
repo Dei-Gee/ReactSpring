@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 
 /**
@@ -22,10 +24,12 @@ public class Item {
 	    private int id;
 	 	
 	 	@Column(name="name")
+	 	@NotBlank(message="Name cannot be blank")
 	    private String _name;
 	    
 	 	@Column(name="quantity")
-	 	private int _quantity;
+	 	@NotNull(message="Quantity cannot be blank")
+	 	private Integer _quantity;
 
 	    public int getId() {
 	        return id;
@@ -43,11 +47,11 @@ public class Item {
 	        this._name = name;
 	    }
 
-	    public int getQuantity() {
+	    public Integer getQuantity() {
 	        return _quantity;
 	    }
 
-	    public void setQuantity(int quantity) {
+	    public void setQuantity(Integer quantity) {
 	        this._quantity = quantity;
 	    }
 
