@@ -1,44 +1,36 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getGroceryItems } from '../actions/groceryListActions';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            items: []
+            items: [], 
+            errors: {}
          }
     }
 
     async componentDidMount(){
         try{
             setInterval(async () => {
-                await axios.get('http://localhost:8181/api/grocerylist')
-                .then((function(res){
-                    this.setState({
-                        items: res.data
-                    });
-                }).bind(this))
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                })
-                .finally(function () {
-                    // always executed
-                });
-            }, 300);
+                this.props.getGroceryItems();
+            }, 10000);
         }
         catch(e){
-
+            console.log("can't get items");
         }
     }
 
     render(){
-        // console.log(this.state.items);
+        console.log(this.state);
 
-        const grocery_items  = this.state.items;
+        const { items }  = this.props.items;
 
-        let items = grocery_items.map((item, index) => {
+        let grocery_items = items.map((item, index) => {
             return(
                 <div className="card my-3 bg-light" key={index}>
                     <h5 className="text-muted mt-3">Item name:</h5> 
@@ -84,7 +76,7 @@ class Home extends Component {
                                     </div>
                                 </div>
             
-                                {items}
+                                {grocery_items}
                             </div>
                         </div>
                     </div>
@@ -95,4 +87,15 @@ class Home extends Component {
     }
 }
 
-export default Home;
+Home.propTypes = {
+    getGroceryItems: propTypes.func.isRequired, 
+    errors: propTypes.object.isRequired, 
+    items: propTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    errors: state.errors, 
+    items: state.items
+})
+
+export default connect(mapStateToProps, {getGroceryItems}) (Home);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addGroceryItem } from '../actions/groceryListActions';
 import classnames from 'classnames';
@@ -108,8 +108,8 @@ class Create extends Component {
 }
 
 Create.propTypes = {
-    addGroceryItem: PropTypes.func.isRequired, 
-    errors: PropTypes.object.isRequired
+    addGroceryItem: propTypes.func.isRequired, 
+    errors: propTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
